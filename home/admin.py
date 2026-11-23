@@ -1,19 +1,16 @@
 from django.contrib import admin
 from .models import Product, Order, OrderItem, ProductReview, Wishlist, ContactMessage, Coupon
 
-
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'category', 'price', 'stock', 'image')
     search_fields = ('name',)
     list_filter = ('category',)
     fields = ('name', 'category', 'description', 'price', 'image', 'stock')
-
-
+    
 class OrderItemInline(admin.TabularInline):
     model = OrderItem
     extra = 0
-
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
@@ -33,11 +30,9 @@ class OrderAdmin(admin.ModelAdmin):
 
     inlines = [OrderItemInline]
 
-
 @admin.register(OrderItem)
 class OrderItemAdmin(admin.ModelAdmin):
     list_display = ('order', 'product', 'quantity', 'price')
-
 
 admin.site.register(ProductReview)
 admin.site.register(Wishlist)

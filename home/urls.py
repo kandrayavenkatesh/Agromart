@@ -39,7 +39,6 @@ urlpatterns = [
     path('stock-management/', views.stock_management, name='stock_management'),
     path('admin-order-management/', views.admin_order_management, name='admin_order_management'),
 
-    # PRODUCT MANAGEMENT
     path('admin/add-product/', views.add_product, name='add_product'),
     path('admin/products/', views.product_management, name='product_management'),
     path('admin/edit-product/<int:product_id>/', views.edit_product, name='edit_product'),

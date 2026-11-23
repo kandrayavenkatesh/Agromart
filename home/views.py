@@ -24,6 +24,7 @@ from django.core.paginator import Paginator
 from django.contrib import messages
 from django.db.models.deletion import ProtectedError
 from .forms import ProductForm
+
 def home(request):
     search_query = request.GET.get('search', '')
     selected_category = request.GET.get('category', '')
@@ -44,7 +45,7 @@ def home(request):
             category__iexact=selected_category
         )
 
-    # PRODUCT SORTING
+    
     if sort_by == 'low':
         products = products.order_by('price')
 
@@ -83,6 +84,7 @@ def add_to_cart(request, product_id):
     request.session.modified = True
 
     return redirect('cart')
+
 def view_cart(request):
     cart = request.session.get('cart', {})
 
@@ -105,6 +107,7 @@ def view_cart(request):
         'products': products,
         'total': total,
     })
+    
 def remove_from_cart(request, product_id):
 
     cart = request.session.get('cart', {}) 
@@ -117,6 +120,7 @@ def remove_from_cart(request, product_id):
     request.session['cart'] = cart
 
     return redirect('cart')
+
 def increase_quantity(request, product_id):
 
     product = get_object_or_404(Product, id=product_id)
@@ -149,7 +153,8 @@ def decrease_quantity(request, product_id):
 
     request.session['cart'] = cart
 
-    return redirect('cart')  
+    return redirect('cart') 
+ 
 def checkout(request):
 
     cart = request.session.get('cart', {})
