@@ -1,0 +1,377 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Admin Order Management - AgroMart</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+
+</head>
+
+<body>
+
+<div class="admin-order-page">
+
+    <div class="admin-orders-container">
+
+        <!-- HEADING -->
+
+        <h1 class="admin-orders-heading">
+            Order Management
+        </h1>
+
+        <p class="admin-orders-subtitle">
+            Search, filter and manage customer orders.
+        </p>
+
+
+        <!-- ORDER STATISTICS -->
+
+        <section class="order-statistics-grid">
+
+            <a href="{% url 'admin_order_management' %}"
+               class="order-stat-card">
+
+                <span>📦</span>
+                <p>Total Orders</p>
+                <h2>{{ total_orders }}</h2>
+
+            </a>
+
+
+            <a href="?status=Pending"
+               class="order-stat-card">
+
+                <span>⏳</span>
+                <p>Pending</p>
+                <h2>{{ pending_orders }}</h2>
+
+            </a>
+
+
+            <a href="?status=Processing"
+               class="order-stat-card">
+
+                <span>⚙️</span>
+                <p>Processing</p>
+                <h2>{{ processing_orders }}</h2>
+
+            </a>
+
+
+            <a href="?status=Delivered"
+               class="order-stat-card">
+
+                <span>✅</span>
+                <p>Delivered</p>
+                <h2>{{ delivered_orders }}</h2>
+
+            </a>
+
+
+            <a href="?status=Cancelled"
+               class="order-stat-card">
+
+                <span>❌</span>
+                <p>Cancelled</p>
+                <h2>{{ cancelled_orders }}</h2>
+
+            </a>
+
+        </section>
+
+
+        <!-- SEARCH AND FILTER -->
+
+        <div class="admin-order-filters">
+
+            <form method="GET" class="admin-order-search">
+
+                <input
+                    type="text"
+                    name="search"
+                    placeholder="Search by Order ID, Customer Name or Phone"
+                    value="{{ search_query }}"
+                >
+
+
+                <select name="status">
+
+                    <option value="">All Orders</option>
+
+                    <option value="Pending"
+                        {% if status_filter == 'Pending' %}selected{% endif %}>
+                        Pending
+                    </option>
+
+                    <option value="Confirmed"
+                        {% if status_filter == 'Confirmed' %}selected{% endif %}>
+                        Confirmed
+                    </option>
+
+                    <option value="Processing"
+                        {% if status_filter == 'Processing' %}selected{% endif %}>
+                        Processing
+                    </option>
+
+                    <option value="Shipped"
+                        {% if status_filter == 'Shipped' %}selected{% endif %}>
+                        Shipped
+                    </option>
+
+                    <option value="Delivered"
+                        {% if status_filter == 'Delivered' %}selected{% endif %}>
+                        Delivered
+                    </option>
+
+                    <option value="Cancelled"
+                        {% if status_filter == 'Cancelled' %}selected{% endif %}>
+                        Cancelled
+                    </option>
+
+                </select>
+
+
+                <button type="submit">
+                    Search / Filter
+                </button>
+
+
+                <a href="{% url 'admin_order_management' %}">
+                    Reset
+                </a>
+
+            </form>
+
+        </div>
+
+
+        <!-- ORDER COUNT -->
+
+        <div class="order-results-info">
+
+            Showing
+            <strong>{{ filtered_order_count }}</strong>
+            matching orders
+
+        </div>
+
+
+        <!-- ORDERS TABLE -->
+
+        <div class="admin-orders-card">
+
+            <div class="admin-orders-table-wrapper">
+
+                <table class="admin-orders-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Order ID</th>
+
+                            <th>Customer</th>
+
+                            <th>Phone</th>
+
+                            <th>Order Date</th>
+
+                            <th>Total Amount</th>
+
+                            <th>Current Status</th>
+
+                            <th>Update Status</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        {% for order in orders %}
+
+                        <tr>
+
+                            <td>
+                                <strong>#{{ order.id }}</strong>
+                            </td>
+
+
+                            <td>
+                                {{ order.name }}
+                            </td>
+
+
+                            <td>
+                                {{ order.phone }}
+                            </td>
+
+
+                            <td>
+                                {{ order.created_at|date:"d-m-Y" }}
+                            </td>
+
+
+                            <td>
+                                ₹{{ order.total_amount|floatformat:2 }}
+                            </td>
+
+
+                            <td>
+
+                                <span class="admin-order-status status-{{ order.status|lower }}">
+                                    {{ order.status }}
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                {% if order.status != 'Cancelled' %}
+
+                                <form method="POST"
+                                      class="admin-status-form">
+
+                                    {% csrf_token %}
+
+                                    <input
+                                        type="hidden"
+                                        name="order_id"
+                                        value="{{ order.id }}"
+                                    >
+
+                                    <input
+                                        type="hidden"
+                                        name="return_query"
+                                        value="{{ return_query }}"
+                                    >
+
+
+                                    <select name="status">
+
+                                        {% for status in allowed_statuses %}
+
+                                            {% if status != 'Cancelled' or order.status == 'Pending' or order.status == 'Confirmed' %}
+
+                                            <option value="{{ status }}"
+                                                {% if order.status == status %}selected{% endif %}>
+                                                {{ status }}
+                                            </option>
+
+                                            {% endif %}
+
+                                        {% endfor %}
+
+                                    </select>
+
+
+                                    <button type="submit">
+                                        Update
+                                    </button>
+
+                                </form>
+
+                                {% else %}
+
+                                    <span class="cancelled-order-label">
+                                        Order Cancelled
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+                        </tr>
+
+
+                        {% empty %}
+
+                        <tr>
+
+                            <td colspan="7" class="admin-orders-empty">
+                                No orders found.
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+            <!-- PAGINATION -->
+
+            {% if page_obj.has_other_pages %}
+
+            <div class="pagination-container">
+
+                {% if page_obj.has_previous %}
+
+                    <a href="?search={{ search_query|urlencode }}&status={{ status_filter|urlencode }}&page={{ page_obj.previous_page_number }}">
+                        ← Previous
+                    </a>
+
+                {% else %}
+
+                    <span class="order-pagination-disabled">
+                        ← Previous
+                    </span>
+
+                {% endif %}
+
+
+                <span>
+                    Page {{ page_obj.number }}
+                    of {{ page_obj.paginator.num_pages }}
+                </span>
+
+
+                {% if page_obj.has_next %}
+
+                    <a href="?search={{ search_query|urlencode }}&status={{ status_filter|urlencode }}&page={{ page_obj.next_page_number }}">
+                        Next →
+                    </a>
+
+                {% else %}
+
+                    <span class="order-pagination-disabled">
+                        Next →
+                    </span>
+
+                {% endif %}
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+
+        <!-- BACK TO DASHBOARD -->
+
+        <a href="{% url 'admin_dashboard' %}"
+           class="admin-orders-back">
+
+            ← Back to Admin Dashboard
+
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

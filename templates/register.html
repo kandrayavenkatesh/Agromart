@@ -1,0 +1,96 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Register - AgroMart</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body class="register-page">
+
+    <nav class="navbar">
+        <h2>AgroMart</h2>
+        <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'login' %}">Login</a></li>
+        </ul>
+    </nav>
+
+    <div class="register-container">
+
+        <div class="register-card">
+
+            <div class="register-heading">
+                <h1>Create Account</h1>
+                <p>Join AgroMart and shop agricultural products easily.</p>
+            </div>
+
+            <form method="POST">
+                {% csrf_token %}
+
+                <div class="register-field">
+                    <label>Full Name</label>
+                    <input type="text" name="first_name"
+                        placeholder="Enter your full name" required>
+                </div>
+                <div class="register-field">
+    <label>Mobile Number</label>
+    <input type="tel"
+        name="mobile"
+        placeholder="Enter 10-digit mobile number"
+        maxlength="10"
+        pattern="[0-9]{10}"
+        required>
+
+    {% if mobile_error %}
+        <p style="color: red; font-size: 13px;">
+            {{ mobile_error }}
+        </p>
+    {% endif %}
+</div>
+
+                <div class="register-field">
+                    {{ form.username.label_tag }}
+                    {{ form.username }}
+                    {{ form.username.errors }}
+                </div>
+
+                <div class="register-field">
+                    {{ form.password1.label_tag }}
+                    {{ form.password1 }}
+                    {{ form.password1.errors }}
+                </div>
+
+                <div class="register-field">
+                    {{ form.password2.label_tag }}
+                    {{ form.password2 }}
+                    {{ form.password2.errors }}
+                </div>
+
+                <div class="register-errors">
+                    {{ form.non_field_errors }}
+                </div>
+
+                <button type="submit" class="register-button">
+                    Create Account
+                </button>
+
+            </form>
+
+            <div class="register-login">
+                <p>Already have an account?</p>
+                <a href="{% url 'login' %}">Login Here</a>
+            </div>
+
+        </div>
+
+    </div>
+
+    <footer>
+        <p>© 2026 AgroMart. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>

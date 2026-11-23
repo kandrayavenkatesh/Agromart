@@ -1,0 +1,70 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Delete Product - AgroMart</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body>
+
+<div class="delete-product-page">
+
+    <div class="delete-product-container">
+
+        <h1>Delete Product</h1>
+
+        <p>
+            Are you sure you want to delete this product?
+        </p>
+
+        <div class="delete-product-details">
+
+            {% if product.image %}
+                <img
+                    src="{{ product.image.url }}"
+                    alt="{{ product.name }}"
+                >
+            {% endif %}
+
+            <h3>{{ product.name }}</h3>
+
+            <p>Category: {{ product.category }}</p>
+
+            <p>Price: ₹{{ product.price }}</p>
+
+            <p>Stock: {{ product.stock }}</p>
+
+        </div>
+
+        {% if error_message %}
+
+            <div class="product-delete-error">
+                {{ error_message }}
+            </div>
+
+        {% else %}
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                <button type="submit" class="confirm-delete-btn">
+                    Yes, Delete Product
+                </button>
+
+            </form>
+
+        {% endif %}
+
+        <a href="{% url 'product_management' %}" class="cancel-delete-btn">
+            Cancel / Back to Products
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,99 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AgroMart Sales Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body class="sales-dashboard-page">
+
+    <nav class="navbar">
+        <h2>AgroMart Admin</h2>
+        <ul>
+            <li><a href="{% url 'admin_dashboard' %}">Dashboard</a></li>
+            <li><a href="{% url 'home' %}">View Website</a></li>
+        </ul>
+    </nav>
+
+    <main class="sales-dashboard-container">
+
+        <div class="sales-heading">
+            <div>
+                <h1>Sales Dashboard</h1>
+                <p>Monitor your AgroMart business performance</p>
+            </div>
+            <span class="sales-admin-label">Admin Report</span>
+        </div>
+
+        <section class="sales-stats-grid">
+
+            <div class="sales-stat-card">
+                <div class="sales-stat-icon">🛒</div>
+                <p>Total Orders</p>
+                <h2>{{ total_orders }}</h2>
+                <span>Orders received</span>
+            </div>
+
+            <div class="sales-stat-card revenue-card">
+                <div class="sales-stat-icon">💰</div>
+                <p>Total Revenue</p>
+                <h2>₹{{ total_revenue }}</h2>
+                <span>Recorded revenue</span>
+            </div>
+
+            <div class="sales-stat-card pending-card">
+                <div class="sales-stat-icon">⏳</div>
+                <p>Pending Orders</p>
+                <h2>{{ pending_orders }}</h2>
+                <span>Awaiting confirmation</span>
+            </div>
+
+            <div class="sales-stat-card delivered-card">
+                <div class="sales-stat-icon">✅</div>
+                <p>Delivered Orders</p>
+                <h2>{{ delivered_orders }}</h2>
+                <span>Successfully delivered</span>
+            </div>
+
+            <div class="sales-stat-card cancelled-card">
+                <div class="sales-stat-icon">❌</div>
+                <p>Cancelled Orders</p>
+                <h2>{{ cancelled_orders }}</h2>
+                <span>Cancelled orders</span>
+            </div>
+
+        </section>
+
+        <section class="sales-report-section">
+            <h2>Sales Reports</h2>
+
+            <a href="{% url 'product_sales_report' %}"
+               class="sales-report-link">
+                <div>
+                    <strong>Product Sales Report</strong>
+                    <p>View sales performance of individual products</p>
+                </div>
+                <span>→</span>
+            </a>
+        </section>
+
+        <div class="sales-dashboard-actions">
+            <a href="{% url 'admin_dashboard' %}">
+                ← Back to Admin Dashboard
+            </a>
+
+            <a href="{% url 'home' %}">
+                Back to AgroMart
+            </a>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>© 2026 AgroMart. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>

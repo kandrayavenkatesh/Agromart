@@ -1,0 +1,116 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>My Wishlist - AgroMart</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <nav class="navbar">
+
+        <h2>AgroMart</h2>
+
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="{% url 'cart' %}">My Cart</a></li>
+            <li><a href="{% url 'my_account' %}">My Account</a></li>
+        </ul>
+
+    </nav>
+
+    <!-- WISHLIST SECTION -->
+
+    <section class="products">
+
+        <h2>❤️ My Wishlist</h2>
+
+        <div class="product-container">
+
+            {% for item in wishlist_items %}
+
+            <div class="product-card">
+
+                <!-- PRODUCT IMAGE -->
+
+                {% if item.product.name == "Urea" %}
+
+                    <img src="{% static 'images/urea.webp' %}"
+                         alt="Urea"
+                         class="wishlist-product-image">
+
+                {% elif item.product.name == "DAP" %}
+
+                    <img src="{% static 'images/dap.webp' %}"
+                         alt="DAP"
+                         class="wishlist-product-image">
+
+                {% elif item.product.name == "NPK" %}
+
+                    <img src="{% static 'images/npk.webp' %}"
+                         alt="NPK"
+                         class="wishlist-product-image">
+
+                {% elif item.product.name == "Organic Fertilizer" %}
+
+                    <img src="{% static 'images/organic.webp' %}"
+                         alt="Organic Fertilizer"
+                         class="wishlist-product-image">
+
+                {% endif %}
+
+                <!-- PRODUCT DETAILS -->
+
+                <h3>{{ item.product.name }}</h3>
+
+                <p>{{ item.product.description }}</p>
+
+                <h4>₹{{ item.product.price }}</h4>
+
+                <!-- VIEW PRODUCT -->
+
+                <a href="{% url 'product_detail' item.product.id %}">
+                    <button type="button">View Product</button>
+                </a>
+
+                <!-- ADD TO CART -->
+
+                <a href="{% url 'add_to_cart' item.product.id %}">
+                    <button type="button">Add to Cart</button>
+                </a>
+
+                <!-- REMOVE FROM WISHLIST -->
+
+                <a href="{% url 'remove_from_wishlist' item.product.id %}">
+                    <button type="button">Remove ❤️</button>
+                </a>
+
+            </div>
+
+            {% empty %}
+
+                <p>Your wishlist is empty.</p>
+
+            {% endfor %}
+
+        </div>
+
+    </section>
+
+    <!-- FOOTER -->
+
+    <footer>
+        <p>© 2026 AgroMart | Agriculture Products Store</p>
+    </footer>
+
+</body>
+
+</html>

@@ -1,0 +1,88 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Product - AgroMart</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body>
+
+<div class="add-product-page">
+
+    <div class="add-product-container">
+
+        <h1>Edit Product</h1>
+
+        <p class="add-product-subtitle">
+            Update the details of {{ product.name }}.
+        </p>
+
+        {% if form.errors %}
+            <div class="product-form-errors">
+                Please correct the errors below.
+                {{ form.errors }}
+            </div>
+        {% endif %}
+
+        <form method="POST" enctype="multipart/form-data">
+
+            {% csrf_token %}
+
+            <div class="product-form-group">
+                <label>Product Name</label>
+                {{ form.name }}
+            </div>
+
+            <div class="product-form-group">
+                <label>Category</label>
+                {{ form.category }}
+            </div>
+
+            <div class="product-form-group">
+                <label>Description</label>
+                {{ form.description }}
+            </div>
+
+            <div class="product-form-group">
+                <label>Price (₹)</label>
+                {{ form.price }}
+            </div>
+
+            <div class="product-form-group">
+                <label>Current Product Image</label>
+
+                {% if product.image %}
+                    <img
+                        src="{{ product.image.url }}"
+                        alt="{{ product.name }}"
+                        class="edit-product-image"
+                    >
+                {% endif %}
+
+                <label>Choose New Image (Optional)</label>
+                {{ form.image }}
+            </div>
+
+            <div class="product-form-group">
+                <label>Available Stock</label>
+                {{ form.stock }}
+            </div>
+
+            <button type="submit" class="add-product-button">
+                Save Changes
+            </button>
+
+        </form>
+
+        <a href="{% url 'product_management' %}" class="add-product-back">
+            ← Back to Product Management
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,84 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Edit Profile - AgroMart</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body class="edit-profile-page">
+
+    <nav class="navbar">
+        <h2>AgroMart</h2>
+        <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'my_account' %}">My Account</a></li>
+        </ul>
+    </nav>
+
+    <div class="edit-profile-container">
+
+        <div class="edit-profile-card">
+
+            <div class="edit-profile-heading">
+                <h1>Edit My Profile</h1>
+                <p>Update your personal information</p>
+            </div>
+
+            <form method="POST">
+                {% csrf_token %}
+
+                <div class="edit-profile-field">
+                    <label>Username</label>
+                    <input type="text"
+                           value="{{ request.user.username }}"
+                           disabled>
+                </div>
+
+                <div class="edit-profile-field">
+                    <label>First Name</label>
+                    <input type="text"
+                           name="first_name"
+                           value="{{ request.user.first_name }}"
+                           placeholder="Enter your first name">
+                </div>
+
+                <div class="edit-profile-field">
+                    <label>Last Name</label>
+                    <input type="text"
+                           name="last_name"
+                           value="{{ request.user.last_name }}"
+                           placeholder="Enter your last name">
+                </div>
+
+                <div class="edit-profile-field">
+                    <label>Email Address</label>
+                    <input type="email"
+                           name="email"
+                           value="{{ request.user.email }}"
+                           placeholder="Enter your email address">
+                </div>
+
+                <button type="submit" class="edit-profile-button">
+                    Save Changes
+                </button>
+
+            </form>
+
+            <div class="edit-profile-back">
+                <a href="{% url 'my_account' %}">← Back to My Account</a>
+            </div>
+
+        </div>
+
+    </div>
+
+    <footer>
+        <p>© 2026 AgroMart. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>

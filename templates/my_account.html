@@ -1,0 +1,116 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>My Account - AgroMart</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <h2>AgroMart</h2>
+        <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'my_orders' %}">My Orders</a></li>
+            <li><a href="{% url 'my_account' %}">My Account</a></li>
+        </ul>
+    </nav>
+
+    <section class="account-hero">
+        <h1>Welcome to AgroMart!</h1>
+        <p>Manage your account and shopping activities</p>
+    </section>
+
+    <div class="account-container">
+
+        <div class="account-profile-card">
+
+            <div class="account-avatar">
+                {{ request.user.first_name|default:request.user.username|slice:":1"|upper }}
+            </div>
+
+            <h2>{{ request.user.first_name|default:request.user.username }}</h2>
+            <p>{{ request.user.email }}</p>
+
+            <span class="account-member">AgroMart Customer</span>
+
+        </div>
+
+        <div class="account-details-card">
+
+            <h2>My Account Details</h2>
+
+            <div class="account-detail">
+                <span>Username</span>
+                <strong>{{ request.user.username }}</strong>
+            </div>
+
+            <div class="account-detail">
+                <span>First Name</span>
+                <strong>{{ request.user.first_name|default:"Not provided" }}</strong>
+            </div>
+
+            <div class="account-detail">
+                <span>Last Name</span>
+                <strong>{{ request.user.last_name|default:"Not provided" }}</strong>
+            </div>
+
+            <div class="account-detail">
+                <span>Email Address</span>
+                <strong>{{ request.user.email }}</strong>
+            </div>
+
+            <div class="account-buttons">
+
+                <a href="{% url 'edit_profile' %}" class="account-btn">
+                    Edit Profile
+                </a>
+
+                <a href="{% url 'change_password' %}" class="account-btn secondary-btn">
+                    Change Password
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="account-menu-card">
+
+            <h2>My Activities</h2>
+
+            <a href="{% url 'my_orders' %}" class="account-menu-item">
+                <span>My Orders</span>
+                <strong>View Orders →</strong>
+            </a>
+
+            <a href="{% url 'wishlist' %}" class="account-menu-item">
+                <span>My Wishlist</span>
+                <strong>View Wishlist →</strong>
+            </a>
+
+            <a href="{% url 'home' %}" class="account-menu-item">
+                <span>Continue Shopping</span>
+                <strong>Shop Now →</strong>
+            </a>
+
+        </div>
+
+        <div class="account-logout">
+            <form method="POST" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit">Logout</button>
+            </form>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>© 2026 AgroMart. All Rights Reserved.</p>
+    </footer>
+
+</body>
+
+</html>

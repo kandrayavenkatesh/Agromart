@@ -1,0 +1,93 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stock Management - AgroMart</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body class="stock-management-page">
+
+    <nav class="navbar">
+        <h2>AgroMart Admin</h2>
+        <ul>
+            <li><a href="{% url 'admin_dashboard' %}">Dashboard</a></li>
+            <li><a href="{% url 'home' %}">View Website</a></li>
+        </ul>
+    </nav>
+
+    <main class="stock-container">
+
+        <div class="stock-heading">
+            <h1>Stock Management</h1>
+            <p>View and update your fertilizer product stock.</p>
+        </div>
+
+        <div class="stock-table-card">
+
+            <table class="stock-table">
+                <thead>
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Current Stock</th>
+                        <th>Update Stock</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for product in products %}
+                    <tr>
+                        <td><strong>{{ product.name }}</strong></td>
+
+                        <td>
+                            {% if product.stock == 0 %}
+                                <span class="stock-out">Out of Stock</span>
+                            {% elif product.stock <= 5 %}
+                                <span class="stock-low">{{ product.stock }} units</span>
+                            {% else %}
+                                <span class="stock-available">{{ product.stock }} units</span>
+                            {% endif %}
+                        </td>
+
+                        <td>
+                            <form method="POST" class="stock-update-form">
+                                {% csrf_token %}
+
+                                <input type="hidden"
+                                       name="product_id"
+                                       value="{{ product.id }}">
+
+                                <input type="number"
+                                       name="stock"
+                                       min="0"
+                                       value="{{ product.stock }}"
+                                       required>
+
+                                <button type="submit">Update</button>
+                            </form>
+                        </td>
+                    </tr>
+
+                    {% empty %}
+                    <tr>
+                        <td colspan="3">No products found.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+
+        <a href="{% url 'admin_dashboard' %}" class="stock-back-link">
+            ← Back to Admin Dashboard
+        </a>
+
+    </main>
+
+    <footer>
+        <p>© 2026 AgroMart. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>

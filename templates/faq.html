@@ -1,0 +1,100 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>FAQ - AgroMart</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <h2>AgroMart</h2>
+        <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'about' %}">About Us</a></li>
+            <li><a href="{% url 'contact' %}">Contact Us</a></li>
+        </ul>
+    </nav>
+
+    <section class="faq-hero">
+        <h1>Frequently Asked Questions</h1>
+        <p>Find answers to common questions about AgroMart</p>
+    </section>
+
+    <div class="faq-container">
+
+        <div class="faq-intro">
+            <h2>How Can We Help You?</h2>
+            <p>Here are answers to some frequently asked questions.</p>
+        </div>
+
+        <div class="faq-item">
+            <details>
+                <summary>1. How can I place an order?</summary>
+                <p>Select a product, add it to your cart and proceed to checkout.</p>
+            </details>
+        </div>
+
+        <div class="faq-item">
+            <details>
+                <summary>2. How can I track my order?</summary>
+                <p>Login to your account and open My Orders to track your order.</p>
+            </details>
+        </div>
+
+        <div class="faq-item">
+            <details>
+                <summary>3. Can I cancel my order?</summary>
+                <p>You can cancel eligible orders from the My Orders page.</p>
+            </details>
+        </div>
+
+        <div class="faq-item">
+            <details>
+                <summary>4. How can I change my password?</summary>
+                <p>Go to My Account and select Change Password.</p>
+            </details>
+        </div>
+
+        <div class="faq-item">
+            <details>
+                <summary>5. How can I contact AgroMart?</summary>
+                <p>Visit our Contact Us page and send us your message.</p>
+            </details>
+        </div>
+
+        <div class="faq-item">
+            <details>
+                <summary>6. How can I add products to my wishlist?</summary>
+                <p>Click the Add to Wishlist button on a product.</p>
+            </details>
+        </div>
+
+        <div class="faq-item">
+            <details>
+                <summary>7. How can I check product availability?</summary>
+                <p>Check the Available Stock information on each product.</p>
+            </details>
+        </div>
+
+        <div class="faq-contact">
+            <h2>Still Have Questions?</h2>
+            <p>Our team is happy to help you.</p>
+            <a href="{% url 'contact' %}">Contact Us</a>
+        </div>
+
+        <div class="faq-back">
+            <a href="{% url 'home' %}">← Back to Home</a>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>© 2026 AgroMart. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,227 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>{{ product.name }} - AgroMart</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body class="product-details-page">
+
+    <nav class="navbar">
+        <h2>AgroMart</h2>
+        <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'my_account' %}">My Account</a></li>
+        </ul>
+    </nav>
+
+    <div class="product-details-container">
+
+        <div class="product-main-card">
+
+            <div class="product-details-image">
+
+                {% if product.name == "Urea" %}
+                <img src="{% static 'images/urea.webp' %}" alt="Urea">
+
+                {% elif product.name == "DAP" %}
+                <img src="{% static 'images/dap.webp' %}" alt="DAP">
+
+                {% elif product.name == "NPK" %}
+                <img src="{% static 'images/npk.webp' %}" alt="NPK">
+
+                {% elif product.name == "Organic Fertilizer" %}
+                <img src="{% static 'images/organic.webp' %}" alt="Organic Fertilizer">
+                {% endif %}
+
+            </div>
+
+            <div class="product-details-info">
+
+                <span class="product-category">AGROMART FERTILIZER</span>
+
+                <h1>{{ product.name }}</h1>
+
+                <p class="product-description">
+                    {{ product.description }}
+                </p>
+
+                <h2 class="product-details-price">
+                    ₹{{ product.price }}
+                </h2>
+
+                {% if product.stock > 0 %}
+
+                <p class="stock-available">
+                    ✓ In Stock ({{ product.stock }} available)
+                </p>
+
+                <a href="{% url 'add_to_cart' product.id %}">
+                    <button type="button" class="product-add-button">
+                        Add to Cart
+                    </button>
+                </a>
+
+                {% else %}
+
+                <p class="stock-unavailable">
+                    Currently Out of Stock
+                </p>
+
+                <button type="button" class="product-add-button" disabled>
+                    Out of Stock
+                </button>
+
+                {% endif %}
+
+                <p class="product-delivery-note">
+                    Quality Fertilizers for Better Farming
+                </p>
+
+                <a href="{% url 'home' %}" class="back-products-link">
+                    ← Back to Products
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- CUSTOMER REVIEWS -->
+
+        <section class="product-review-section">
+
+            <h2>Customer Reviews</h2>
+            <p class="section-subtitle">See what our customers say</p>
+
+            {% for review in reviews %}
+
+            <div class="customer-review-card">
+
+                <h4>{{ review.user.username }}</h4>
+
+                <p class="review-rating">
+                    {{ review.rating }} ⭐
+                </p>
+
+                <p>{{ review.comment }}</p>
+
+                <small>{{ review.created_at }}</small>
+
+            </div>
+
+            {% empty %}
+
+            <p class="no-reviews">
+                No reviews yet. Be the first to review!
+            </p>
+
+            {% endfor %}
+
+        </section>
+
+
+        <!-- WRITE A REVIEW -->
+
+        <section class="write-review-section">
+
+            <h2>Write a Product Review</h2>
+
+            {% if user.is_authenticated %}
+
+            <form method="POST" class="review-form">
+                {% csrf_token %}
+
+                <label>Give Rating</label>
+
+                <select name="rating" required>
+                    <option value="5">5 Stars</option>
+                    <option value="4">4 Stars</option>
+                    <option value="3">3 Stars</option>
+                    <option value="2">2 Stars</option>
+                    <option value="1">1 Star</option>
+                </select>
+
+                <label>Your Review</label>
+
+                <textarea name="comment"
+                          placeholder="Write your experience..."
+                          required></textarea>
+
+                <button type="submit" class="submit-review-button">
+                    Submit Review
+                </button>
+
+            </form>
+
+            {% else %}
+
+            <p>
+                Please <a href="{% url 'login' %}">Login</a>
+                to write a review.
+            </p>
+
+            {% endif %}
+
+        </section>
+
+
+        <!-- RELATED PRODUCTS -->
+
+        <section class="related-products-section">
+
+            <h2>Related Products</h2>
+            <p class="section-subtitle">Explore more farming products</p>
+
+            <div class="related-products-grid">
+
+                {% for related in related_products %}
+
+                <div class="related-product-card">
+
+                    {% if related.name == "Urea" %}
+                    <img src="{% static 'images/urea.webp' %}" alt="Urea">
+
+                    {% elif related.name == "DAP" %}
+                    <img src="{% static 'images/dap.webp' %}" alt="DAP">
+
+                    {% elif related.name == "NPK" %}
+                    <img src="{% static 'images/npk.webp' %}" alt="NPK">
+
+                    {% elif related.name == "Organic Fertilizer" %}
+                    <img src="{% static 'images/organic.webp' %}" alt="Organic Fertilizer">
+                    {% endif %}
+
+                    <h3>{{ related.name }}</h3>
+
+                    <p>₹{{ related.price }}</p>
+
+                    <a href="{% url 'product_detail' related.id %}">
+                        <button type="button">View Product</button>
+                    </a>
+
+                </div>
+
+                {% empty %}
+
+                <p>No related products available.</p>
+
+                {% endfor %}
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+    <footer>
+        <p>© 2026 AgroMart. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>

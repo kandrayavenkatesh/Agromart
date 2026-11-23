@@ -1,0 +1,229 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Customer Management - AgroMart</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body class="customer-management-page">
+
+    <!-- NAVBAR -->
+
+    <nav class="navbar">
+
+        <h2>AgroMart Admin</h2>
+
+        <ul>
+            <li>
+                <a href="{% url 'admin_dashboard' %}">Dashboard</a>
+            </li>
+
+            <li>
+                <a href="{% url 'home' %}">View Website</a>
+            </li>
+        </ul>
+
+    </nav>
+
+
+    <main class="customer-management-container">
+
+        <!-- PAGE HEADING -->
+
+        <div class="customer-management-heading">
+
+            <h1>Customer Management</h1>
+
+            <p>View and manage your registered customers</p>
+
+        </div>
+
+
+        <section class="customer-management-card">
+
+            <!-- SEARCH -->
+
+            <form method="GET" class="customer-search-form">
+
+                <input
+                    type="text"
+                    name="search"
+                    placeholder="Search by username, email or first name"
+                    value="{{ search_query }}"
+                >
+
+                <button type="submit">Search</button>
+
+                {% if search_query %}
+                    <a href="{% url 'customer_management' %}"
+                       class="customer-clear-search">
+                        Clear Search
+                    </a>
+                {% endif %}
+
+            </form>
+
+
+            <!-- CUSTOMER COUNT -->
+
+            <div class="customer-table-heading">
+
+                <h2>Registered Customers</h2>
+                <br>
+
+                <p>
+                    Total Customers Found:
+                    <strong>{{ total_customers }}</strong>
+                </p>
+
+            </div>
+
+
+            <!-- CUSTOMER TABLE -->
+
+            <div class="customer-table-wrapper">
+
+                <table class="customer-table">
+
+                    <thead>
+
+                        <tr>
+                            <th>Username</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Email</th>
+                            <th>Date Joined</th>
+                            <th>Total Orders</th>
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        {% for customer in customers %}
+
+                        <tr>
+
+                            <td>
+                                <strong>{{ customer.username }}</strong>
+                            </td>
+
+                            <td>
+                                {{ customer.first_name|default:"-" }}
+                            </td>
+
+                            <td>
+                                {{ customer.last_name|default:"-" }}
+                            </td>
+
+                            <td>
+                                {{ customer.email|default:"-" }}
+                            </td>
+
+                            <td>
+                                {{ customer.date_joined|date:"d-m-Y" }}
+                            </td>
+
+                            <td>
+                                <span class="customer-order-count">
+                                    {{ customer.total_orders }}
+                                </span>
+                            </td>
+
+                        </tr>
+
+                        {% empty %}
+
+                        <tr>
+                            <td colspan="6" class="customer-empty-message">
+                                No customers found.
+                            </td>
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+            <!-- PAGINATION -->
+
+            {% if customers.paginator.num_pages > 1 %}
+
+            <div class="customer-pagination">
+
+                {% if customers.has_previous %}
+
+                    <a href="?search={{ search_query|urlencode }}&page={{ customers.previous_page_number }}">
+                        ← Previous
+                    </a>
+
+                {% else %}
+
+                    <span class="pagination-disabled">
+                        ← Previous
+                    </span>
+
+                {% endif %}
+
+
+                <span class="customer-page-info">
+                    Page {{ customers.number }}
+                    of {{ customers.paginator.num_pages }}
+                </span>
+
+
+                {% if customers.has_next %}
+
+                    <a href="?search={{ search_query|urlencode }}&page={{ customers.next_page_number }}">
+                        Next →
+                    </a>
+
+                {% else %}
+
+                    <span class="pagination-disabled">
+                        Next →
+                    </span>
+
+                {% endif %}
+
+            </div>
+
+            {% endif %}
+
+        </section>
+
+
+        <!-- BACK TO DASHBOARD -->
+
+        <a href="{% url 'admin_dashboard' %}"
+           class="customer-back-link">
+
+            ← Back to Admin Dashboard
+
+        </a>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <p>© 2026 AgroMart. All Rights Reserved.</p>
+
+    </footer>
+
+</body>
+
+</html>

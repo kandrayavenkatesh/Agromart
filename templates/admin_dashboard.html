@@ -1,0 +1,352 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>AgroMart Admin Dashboard</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body class="admin-dashboard-page">
+
+    <!-- NAVBAR -->
+
+    <nav class="navbar">
+
+        <h2>AgroMart Admin</h2>
+
+        <ul>
+            <li>
+                <a href="{% url 'home' %}">View Website</a>
+            </li>
+        </ul>
+
+    </nav>
+
+    <main class="admin-dashboard-container">
+
+        <!-- DASHBOARD HEADING -->
+
+        <div class="admin-dashboard-heading">
+
+            <div>
+                <h1>Admin Dashboard</h1>
+                <p>Manage your AgroMart inventory and customers</p>
+            </div>
+
+            <span class="admin-label">Administrator</span>
+
+        </div>
+
+
+        <!-- INVENTORY OVERVIEW -->
+
+        <section class="admin-section">
+
+            <h2>Inventory Overview</h2>
+
+            <div class="admin-stats-grid">
+
+                <div class="admin-stat-card">
+
+                    <div class="admin-stat-icon">📦</div>
+
+                    <p>Total Products</p>
+
+                    <h2>{{ total_products }}</h2>
+
+                    <span>Products in inventory</span>
+
+                </div>
+
+
+                <div class="admin-stat-card">
+
+                    <div class="admin-stat-icon">📊</div>
+
+                    <p>Total Available Stock</p>
+
+                    <h2>{{ total_stock }}</h2>
+
+                    <span>Units currently available</span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- BUSINESS STATISTICS -->
+
+        <section class="admin-section">
+
+            <h2>Business Statistics</h2>
+
+            <div class="admin-stats-grid">
+
+                <!-- TOTAL CUSTOMERS -->
+
+                <a href="{% url 'customer_management' %}"
+                   class="admin-stat-card"
+                   style="display:block; text-decoration:none; color:inherit;">
+
+                    <div class="admin-stat-icon">👥</div>
+
+                    <p>Total Customers</p>
+
+                    <h2>{{ total_customers }}</h2>
+
+                    <span>Registered customers</span>
+
+                </a>
+
+
+                <!-- TOTAL ORDERS -->
+
+                <a href="{% url 'admin_order_management' %}"
+                   class="admin-stat-card"
+                   style="display:block; text-decoration:none; color:inherit;">
+
+                    <div class="admin-stat-icon">🛒</div>
+
+                    <p>Total Orders</p>
+
+                    <h2>{{ total_orders }}</h2>
+
+                    <span>All customer orders</span>
+
+                </a>
+
+
+                <!-- TOTAL REVENUE -->
+
+                <a href="{% url 'sales_dashboard' %}"
+                   class="admin-stat-card"
+                   style="display:block; text-decoration:none; color:inherit;">
+
+                    <div class="admin-stat-icon">💰</div>
+
+                    <p>Total Revenue</p>
+
+                    <h2>₹{{ total_revenue|floatformat:2 }}</h2>
+
+                    <span>From delivered orders</span>
+
+                </a>
+
+
+                <!-- PENDING ORDERS -->
+
+                <a href="{% url 'admin_order_management' %}?status=Pending"
+                   class="admin-stat-card"
+                   style="display:block; text-decoration:none; color:inherit;">
+
+                    <div class="admin-stat-icon">⏳</div>
+
+                    <p>Pending Orders</p>
+
+                    <h2>{{ pending_orders }}</h2>
+
+                    <span>Awaiting confirmation</span>
+
+                </a>
+
+
+                <!-- DELIVERED ORDERS -->
+
+                <a href="{% url 'admin_order_management' %}?status=Delivered"
+                   class="admin-stat-card"
+                   style="display:block; text-decoration:none; color:inherit;">
+
+                    <div class="admin-stat-icon">✅</div>
+
+                    <p>Delivered Orders</p>
+
+                    <h2>{{ delivered_orders }}</h2>
+
+                    <span>Successfully delivered</span>
+
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- INVENTORY ALERTS -->
+
+        <section class="admin-section">
+
+            <h2>Inventory Alerts</h2>
+
+            <div class="admin-alert-grid">
+
+                <!-- LOW STOCK -->
+
+                <div class="admin-alert-card low-stock-card">
+
+                    <div class="admin-alert-heading">
+
+                        <h3>Low Stock Products</h3>
+
+                        <span>Low Stock</span>
+
+                    </div>
+
+                    {% for product in low_stock_products %}
+
+                    <div class="admin-product-alert">
+
+                        <strong>{{ product.name }}</strong>
+
+                        <span>Only {{ product.stock }} left</span>
+
+                    </div>
+
+                    {% empty %}
+
+                    <p class="admin-empty-message">
+                        No low-stock products.
+                    </p>
+
+                    {% endfor %}
+
+                </div>
+
+
+                <!-- OUT OF STOCK -->
+
+                <div class="admin-alert-card out-stock-card">
+
+                    <div class="admin-alert-heading">
+
+                        <h3>Out of Stock Products</h3>
+
+                        <span>Unavailable</span>
+
+                    </div>
+
+                    {% for product in out_of_stock_products %}
+
+                    <div class="admin-product-alert">
+
+                        <strong>{{ product.name }}</strong>
+
+                        <span>Out of Stock</span>
+
+                    </div>
+
+                    {% empty %}
+
+                    <p class="admin-empty-message">
+                        No out-of-stock products.
+                    </p>
+
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- QUICK MANAGEMENT -->
+
+        <section class="admin-section">
+
+            <h2>Quick Management</h2>
+
+            <div class="admin-management-grid">
+
+                <!-- CUSTOMER MANAGEMENT -->
+
+                <a href="{% url 'customer_management' %}" class="admin-management-card">
+
+                    <div class="management-icon">👥</div>
+
+                    <strong>Customer Management</strong>
+
+                    <p>View and manage registered customers</p>
+
+                    <span>Manage Customers →</span>
+
+                </a>
+
+
+                <!-- STOCK MANAGEMENT -->
+
+                <a href="{% url 'stock_management' %}" class="admin-management-card">
+
+                    <div class="management-icon">📦</div>
+
+                    <strong>Stock Management</strong>
+
+                    <p>View and update fertilizer product stock</p>
+
+                    <span>Manage Stock →</span>
+
+                </a>
+
+
+                <!-- ORDER MANAGEMENT -->
+
+                <a href="{% url 'admin_order_management' %}" class="admin-management-card">
+
+                    <div class="management-icon">🛒</div>
+
+                    <strong>Order Management</strong>
+
+                    <p>View customer orders and update order status</p>
+
+                    <span>Manage Orders →</span>
+
+                </a>
+
+
+                <!-- PRODUCT MANAGEMENT -->
+
+                <a href="{% url 'product_management' %}" class="admin-management-card">
+
+                    <div class="management-icon">📦</div>
+
+                    <strong>Product Management</strong>
+
+                    <p>Add, edit and delete products in AgroMart.</p>
+
+                    <span>Manage Products →</span>
+
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- BACK TO WEBSITE -->
+
+        <a href="{% url 'home' %}" class="admin-back-link">
+
+            ← Back to AgroMart
+
+        </a>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <p>© 2026 AgroMart. All Rights Reserved.</p>
+
+    </footer>
+
+</body>
+
+</html>

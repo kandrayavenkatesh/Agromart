@@ -1,0 +1,188 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Order Details - AgroMart</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body class="order-details-page">
+
+    <nav class="navbar">
+        <h2>AgroMart</h2>
+        <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'my_orders' %}">My Orders</a></li>
+        </ul>
+    </nav>
+
+    <main class="order-details-container">
+
+        <div class="order-details-heading">
+            <div>
+                <h1>Order Details</h1>
+                <p>View your order information and delivery progress</p>
+            </div>
+            <span class="order-id-badge">Order #{{ order.id }}</span>
+        </div>
+
+        <section class="details-card">
+
+            <div class="details-card-heading">
+                <h2>Order Summary</h2>
+                <span class="order-date">
+                    {{ order.created_at|date:"d M Y" }}
+                </span>
+            </div>
+
+            <p><strong>Order ID:</strong> #{{ order.id }}</p>
+            <p><strong>Order Status:</strong> {{ order.status }}</p>
+
+            <hr>
+
+            <h2>Order Tracking</h2>
+
+            {% if order.status == 'Cancelled' %}
+
+                <div class="order-cancelled-box">
+                    <h3>Order Cancelled</h3>
+                    <p>This order has been cancelled.</p>
+                </div>
+
+            {% else %}
+
+                <div class="tracking-container">
+
+                    <div class="tracking-step">
+                        <span class="tracking-icon">✓</span>
+                        <div>
+                            <strong>Order Placed</strong>
+                            <p>Your order has been received.</p>
+                        </div>
+                    </div>
+
+                    <div class="tracking-step">
+                        <span class="tracking-icon">
+                            {% if order.status == 'Confirmed' or order.status == 'Processing' or order.status == 'Shipped' or order.status == 'Delivered' %}
+                                ✓
+                            {% else %}2{% endif %}
+                        </span>
+                        <div>
+                            <strong>Confirmed</strong>
+                            <p>Order accepted by seller.</p>
+                        </div>
+                    </div>
+
+                    <div class="tracking-step">
+                        <span class="tracking-icon">
+                            {% if order.status == 'Processing' or order.status == 'Shipped' or order.status == 'Delivered' %}
+                                ✓
+                            {% else %}3{% endif %}
+                        </span>
+                        <div>
+                            <strong>Processing</strong>
+                            <p>Your order is being prepared.</p>
+                        </div>
+                    </div>
+
+                    <div class="tracking-step">
+                        <span class="tracking-icon">
+                            {% if order.status == 'Shipped' or order.status == 'Delivered' %}
+                                ✓
+                            {% else %}4{% endif %}
+                        </span>
+                        <div>
+                            <strong>Shipped</strong>
+                            <p>Your order is on the way.</p>
+                        </div>
+                    </div>
+
+                    <div class="tracking-step">
+                        <span class="tracking-icon">
+                            {% if order.status == 'Delivered' %}
+                                ✓
+                            {% else %}5{% endif %}
+                        </span>
+                        <div>
+                            <strong>Delivered</strong>
+                            <p>Order delivered successfully.</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            {% endif %}
+
+        </section>
+
+        <section class="details-card">
+            <h2>Customer Details</h2>
+
+            <div class="customer-details-grid">
+                <div><span>Name</span><strong>{{ order.name }}</strong></div>
+                <div><span>Phone</span><strong>{{ order.phone }}</strong></div>
+                <div><span>Email</span><strong>{{ order.email }}</strong></div>
+                <div><span>City</span><strong>{{ order.city }}</strong></div>
+                <div><span>Pincode</span><strong>{{ order.pincode }}</strong></div>
+                <div class="address-detail">
+                    <span>Delivery Address</span>
+                    <strong>{{ order.address }}</strong>
+                </div>
+            </div>
+        </section>
+
+        <section class="details-card">
+            <h2>Ordered Products</h2>
+
+            {% for item in order.items.all %}
+
+                <div class="order-product">
+
+                    {% if "urea" in item.product.name|lower %}
+                        <img src="{% static 'images/urea.webp' %}" alt="Urea">
+                    {% elif "dap" in item.product.name|lower %}
+                        <img src="{% static 'images/dap.webp' %}" alt="DAP">
+                    {% elif "npk" in item.product.name|lower %}
+                        <img src="{% static 'images/npk.webp' %}" alt="NPK">
+                    {% elif "organic" in item.product.name|lower %}
+                        <img src="{% static 'images/organic.webp' %}" alt="Organic Fertilizer">
+                    {% endif %}
+
+                    <div class="order-product-info">
+                        <h3>{{ item.product.name }}</h3>
+                        <p>Quantity: {{ item.quantity }}</p>
+                        <p>Price: ₹{{ item.price }}</p>
+                        <strong>Subtotal: ₹{% widthratio item.price 1 item.quantity %}</strong>
+                    </div>
+
+                </div>
+
+            {% empty %}
+                <p>No products found in this order.</p>
+            {% endfor %}
+
+            <div class="order-total-section">
+                <span>Total Amount</span>
+                <strong>₹{{ order.total_amount }}</strong>
+            </div>
+        </section>
+
+        <div class="order-details-actions">
+            <button onclick="window.print()" class="invoice-button">
+                Print Invoice
+            </button>
+
+            <a href="{% url 'my_orders' %}" class="back-orders-button">
+                Back to My Orders
+            </a>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>© 2026 AgroMart. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>

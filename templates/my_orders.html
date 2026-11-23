@@ -1,0 +1,151 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>My Orders - AgroMart</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body>
+
+    <div class="orders-container">
+
+        <h1>My Orders</h1>
+
+        {% for order in orders %}
+
+        <div class="order-card">
+
+            <div class="order-header">
+                <div>
+                    <strong>Order ID:</strong> {{ order.id }}<br>
+                    <strong>Date:</strong> {{ order.created_at|date:"d M Y" }}
+                </div>
+
+                <div>
+                    <strong>Status:</strong>
+
+                    <span class="order-status
+                    {% if order.status == 'Pending' %}status-pending
+                    {% elif order.status == 'Confirmed' %}status-confirmed
+                    {% elif order.status == 'Processing' %}status-processing
+                    {% elif order.status == 'Shipped' %}status-shipped
+                    {% elif order.status == 'Delivered' %}status-delivered
+                    {% elif order.status == 'Cancelled' %}status-cancelled
+                    {% endif %}">
+
+                        {{ order.status }}
+
+                    </span>
+                </div>
+            </div>
+
+            {% if order.status != 'Cancelled' %}
+
+            <div class="order-tracker">
+
+                <div class="tracker-step active">
+                    <div class="tracker-circle">1</div>
+                    <span>Confirmed</span>
+                </div>
+
+                <div class="tracker-line {% if order.status == 'Processing' or order.status == 'Shipped' or order.status == 'Delivered' %}active{% endif %}"></div>
+
+                <div class="tracker-step {% if order.status == 'Processing' or order.status == 'Shipped' or order.status == 'Delivered' %}active{% endif %}">
+                    <div class="tracker-circle">2</div>
+                    <span>Processing</span>
+                </div>
+
+                <div class="tracker-line {% if order.status == 'Shipped' or order.status == 'Delivered' %}active{% endif %}"></div>
+
+                <div class="tracker-step {% if order.status == 'Shipped' or order.status == 'Delivered' %}active{% endif %}">
+                    <div class="tracker-circle">3</div>
+                    <span>Shipped</span>
+                </div>
+
+                <div class="tracker-line {% if order.status == 'Delivered' %}active{% endif %}"></div>
+
+                <div class="tracker-step {% if order.status == 'Delivered' %}active{% endif %}">
+                    <div class="tracker-circle">4</div>
+                    <span>Delivered</span>
+                </div>
+
+            </div>
+
+            {% else %}
+
+            <p class="cancelled-message">
+                Your order has been cancelled.
+            </p>
+
+            {% endif %}
+
+            {% for item in order.items.all %}
+
+            <div class="order-product">
+
+                {% if "urea" in item.product.name|lower %}
+                <img src="/static/images/urea.WEBP" alt="Urea">
+
+                {% elif "dap" in item.product.name|lower %}
+                <img src="/static/images/dap.WEBP" alt="DAP">
+
+                {% elif "npk" in item.product.name|lower %}
+                <img src="/static/images/npk.WEBP" alt="NPK">
+
+                {% elif "organic" in item.product.name|lower %}
+                <img src="/static/images/organic.WEBP" alt="Organic">
+
+                {% endif %}
+
+                <div>
+                    <h4>{{ item.product.name }}</h4>
+                    <p>Quantity: {{ item.quantity }}</p>
+                    <p>Price: ₹{{ item.price }}</p>
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+            <hr>
+
+            <h3>Total Amount: ₹{{ order.total_amount }}</h3>
+
+            <a href="{% url 'order_details' order.id %}">
+                View Details
+            </a>
+
+            {% if order.status == 'Pending' or order.status == 'Confirmed' %}
+
+            <form method="POST" action="{% url 'cancel_order' order.id %}">
+                {% csrf_token %}
+
+                <button type="submit"
+                    class="cancel-order-btn"
+                    onclick="return confirm('Are you sure you want to cancel this order?')">
+
+                    Cancel Order
+
+                </button>
+            </form>
+
+            {% endif %}
+
+        </div>
+
+        {% empty %}
+
+        <p>You have not placed any orders yet.</p>
+
+        {% endfor %}
+
+        <a href="{% url 'my_account' %}">Back to My Account</a>
+
+    </div>
+
+</body>
+
+</html>

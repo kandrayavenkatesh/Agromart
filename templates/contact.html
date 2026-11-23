@@ -1,0 +1,95 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Contact Us - AgroMart</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <h2>AgroMart</h2>
+
+        <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'about' %}">About Us</a></li>
+            <li><a href="{% url 'contact' %}">Contact Us</a></li>
+        </ul>
+    </nav>
+
+    <section class="contact-hero">
+        <h1>Contact Us</h1>
+        <p>We're happy to help you. Get in touch with AgroMart!</p>
+    </section>
+
+    <div class="contact-container">
+
+        <div class="contact-info">
+            <h2>Get In Touch</h2>
+
+            <p>Have questions about fertilizers or your orders?</p>
+
+            <div class="contact-info-item">
+                <h3>Our Service</h3>
+                <p>Quality Agricultural Products</p>
+            </div>
+
+            <div class="contact-info-item">
+                <h3>Customer Support</h3>
+                <p>Send us your questions using the contact form.</p>
+            </div>
+
+            <div class="contact-info-item">
+                <h3>AgroMart</h3>
+                <p>Your Partner in Agricultural Shopping</p>
+            </div>
+        </div>
+
+        <div class="contact-form-card">
+
+            <h2>Send Us a Message</h2>
+
+            {% if success %}
+                <p class="contact-success">
+                    Your message has been sent successfully!
+                </p>
+            {% endif %}
+
+            <form method="POST">
+                {% csrf_token %}
+
+                <label>Your Name</label>
+                <input type="text" name="name" placeholder="Enter your name" required>
+
+                <label>Email Address</label>
+                <input type="email" name="email" placeholder="Enter your email" required>
+
+                <label>Subject</label>
+                <input type="text" name="subject" placeholder="Enter subject" required>
+
+                <label>Your Message</label>
+                <textarea name="message" rows="6" placeholder="Write your message here..." required></textarea>
+
+                <button type="submit" class="contact-submit">
+                    Send Message
+                </button>
+
+            </form>
+
+            <a href="{% url 'home' %}" class="contact-back">
+                Back to Home
+            </a>
+
+        </div>
+
+    </div>
+
+    <footer>
+        <p>© 2026 AgroMart. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>

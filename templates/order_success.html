@@ -1,0 +1,97 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Order Successful - AgroMart</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body class="order-success-page">
+
+    <nav class="navbar">
+        <h2>AgroMart</h2>
+        <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'my_account' %}">My Account</a></li>
+        </ul>
+    </nav>
+
+    <div class="success-container">
+
+        <div class="success-card">
+
+            <div class="success-icon">
+                ✓
+            </div>
+
+            <h1>Order Placed Successfully!</h1>
+
+            <p class="success-message">
+                Thank you for shopping with AgroMart.
+                Your order has been received successfully.
+            </p>
+
+            <div class="success-divider"></div>
+
+            <h2>Order Details</h2>
+
+            <div class="success-details">
+
+                <div class="success-detail-row">
+                    <span>Order ID</span>
+                    <strong>#{{ order.id }}</strong>
+                </div>
+
+                <div class="success-detail-row">
+                    <span>Customer Name</span>
+                    <strong>{{ order.name }}</strong>
+                </div>
+
+                <div class="success-detail-row">
+                    <span>Mobile Number</span>
+                    <strong>{{ order.phone }}</strong>
+                </div>
+
+                <div class="success-detail-row">
+                    <span>Total Amount</span>
+                    <strong class="success-amount">
+                        ₹{{ order.total_amount }}
+                    </strong>
+                </div>
+
+                <div class="success-detail-row">
+                    <span>Order Status</span>
+                    <strong class="success-status">
+                        {{ order.status }}
+                    </strong>
+                </div>
+
+            </div>
+
+            <div class="success-buttons">
+
+                <a href="{% url 'my_orders' %}"
+                   class="view-orders-button">
+                    View My Orders
+                </a>
+
+                <a href="{% url 'home' %}"
+                   class="continue-success-button">
+                    Continue Shopping
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <footer>
+        <p>© 2026 AgroMart. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>

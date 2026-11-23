@@ -1,0 +1,88 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product Sales Report - AgroMart</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body class="product-sales-page">
+
+    <nav class="navbar">
+        <h2>AgroMart Admin</h2>
+        <ul>
+            <li><a href="{% url 'sales_dashboard' %}">Sales Dashboard</a></li>
+            <li><a href="{% url 'home' %}">View Website</a></li>
+        </ul>
+    </nav>
+
+    <main class="product-sales-container">
+
+        <div class="product-sales-heading">
+            <div>
+                <h1>Product Sales Report</h1>
+                <p>Check the sales performance of individual products</p>
+            </div>
+            <span class="product-sales-label">Sales Report</span>
+        </div>
+
+        <section class="product-sales-card">
+
+            <div class="product-sales-card-heading">
+                <h2>Sales by Product</h2>
+                <p>Product-wise quantity and revenue details</p>
+            </div>
+
+            <div class="product-sales-table-wrapper">
+
+                <table class="product-sales-table">
+                    <thead>
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Total Quantity Sold</th>
+                            <th>Total Sales Amount</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for item in product_sales %}
+                        <tr>
+                            <td>
+                                <strong>{{ item.product__name }}</strong>
+                            </td>
+                            <td>
+                                <span class="quantity-badge">
+                                    {{ item.total_quantity }}
+                                </span>
+                            </td>
+                            <td class="sales-amount">
+                                ₹{{ item.total_sales|floatformat:2 }}
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="3" class="no-sales-message">
+                                No sales available yet.
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+
+        </section>
+
+        <a href="{% url 'sales_dashboard' %}" class="product-sales-back">
+            ← Back to Sales Dashboard
+        </a>
+
+    </main>
+
+    <footer>
+        <p>© 2026 AgroMart. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>

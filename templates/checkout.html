@@ -1,0 +1,214 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Checkout - AgroMart</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body class="checkout-page">
+
+    <nav class="navbar">
+        <h2>AgroMart</h2>
+        <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'my_account' %}">My Account</a></li>
+        </ul>
+    </nav>
+
+    <div class="checkout-main-container">
+
+        <div class="checkout-heading">
+            <h1>Secure Checkout</h1>
+            <p>Complete your order with AgroMart</p>
+        </div>
+
+        <div class="checkout-layout">
+
+            <!-- DELIVERY DETAILS -->
+
+            <div class="checkout-form-card">
+
+                <h2>Delivery Details</h2>
+                <p class="checkout-subtitle">Enter your delivery information</p>
+
+                {% if error %}
+                <div class="checkout-error">
+                    {{ error }}
+                </div>
+                {% endif %}
+
+                <form method="POST">
+                    {% csrf_token %}
+
+                    <div class="checkout-field">
+                        <label>Full Name</label>
+                        <input type="text"
+                               name="name"
+                               placeholder="Enter your full name"
+                               required>
+                    </div>
+
+                    <div class="checkout-field">
+                        <label>Mobile Number</label>
+                        <input type="tel"
+                               name="phone"
+                               placeholder="Enter your mobile number"
+                               maxlength="10"
+                               required>
+                    </div>
+
+                    <div class="checkout-field">
+                        <label>Email Address</label>
+                        <input type="email"
+                               name="email"
+                               placeholder="Enter your email address"
+                               required>
+                    </div>
+
+                    <div class="checkout-field">
+                        <label>Delivery Address</label>
+                        <textarea name="address"
+                                  placeholder="Enter your complete delivery address"
+                                  required></textarea>
+                    </div>
+
+                    <div class="checkout-field">
+                        <label>City</label>
+                        <input type="text"
+                               name="city"
+                               placeholder="Enter your city"
+                               required>
+                    </div>
+
+                    <div class="checkout-field">
+                        <label>PIN Code</label>
+                        <input type="text"
+                               name="pincode"
+                               placeholder="Enter 6-digit PIN code"
+                               maxlength="6"
+                               required>
+                    </div>
+
+                    <button type="submit" class="place-order-button">
+                        Place Order
+                    </button>
+
+                </form>
+
+            </div>
+
+
+            <!-- ORDER SUMMARY -->
+
+            <div class="checkout-summary-card">
+
+                <h2>Order Summary</h2>
+
+                <p class="checkout-subtitle">
+                    Your selected products
+                </p>
+
+                <div class="checkout-items">
+
+                    {% for item in products %}
+
+                    <div class="checkout-item">
+
+                        <div>
+                            <h4>{{ item.product.name }}</h4>
+                            <p>Quantity: {{ item.quantity }}</p>
+                        </div>
+
+                        <strong>₹{{ item.subtotal }}</strong>
+
+                    </div>
+
+                    {% empty %}
+
+                    <p>Your cart is empty.</p>
+
+                    {% endfor %}
+
+                </div>
+
+
+                <!-- COUPON -->
+
+                <div class="checkout-coupon">
+
+                    <h3>Apply Coupon</h3>
+
+                    <form method="POST" action="{% url 'apply_coupon' %}">
+                        {% csrf_token %}
+
+                        <div class="coupon-input-group">
+
+                            <input type="text"
+                                   name="coupon_code"
+                                   placeholder="Enter coupon code"
+                                   required>
+
+                            <button type="submit">
+                                Apply
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                    {% if request.session.coupon_error %}
+                    <p class="coupon-error">
+                        {{ request.session.coupon_error }}
+                    </p>
+                    {% endif %}
+
+                    {% if request.session.coupon_code %}
+
+                    <p class="coupon-success">
+                        ✓ Coupon Applied: {{ request.session.coupon_code }}
+                    </p>
+
+                    <div class="checkout-price-row">
+                        <span>Discount</span>
+                        <strong>- ₹{{ request.session.coupon_discount }}</strong>
+                    </div>
+
+                    {% endif %}
+
+                </div>
+
+
+                <!-- TOTAL -->
+
+                <div class="checkout-total">
+
+                    <span>Total Amount</span>
+
+                    <h2>₹{{ total }}</h2>
+
+                </div>
+
+                <p class="checkout-secure-note">
+                    Your order will be placed after you submit the delivery details.
+                </p>
+
+                <a href="{% url 'home' %}" class="checkout-back-link">
+                    ← Continue Shopping
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <footer>
+        <p>© 2026 AgroMart. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
