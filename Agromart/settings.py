@@ -1,14 +1,16 @@
 """
 Django settings for Agromart project.
 """
-
+import os
+from dotenv import load_dotenv
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+load_dotenv(BASE_DIR / ".env")
 
-SECRET_KEY = 'XQN1xVC7ZNfz_KhFrJevkKy_uldGast-tNlDTiUMz6tVzQjPZf-zX22CMUHAeUL7x9k'
+SECRET_KEY = os.getenv("SECRET_KEY")
 
-DEBUG = True
+DEBUG = os.getenv("DEBUG", "False").lower() == "true"
 
 ALLOWED_HOSTS = []
 
