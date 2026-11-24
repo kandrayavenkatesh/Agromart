@@ -31,6 +31,7 @@ def home(request):
     sort_by = request.GET.get('sort', '')
 
     products = Product.objects.all()
+    print("TOTAL PRODUCTS:", products.count())
     products = products.annotate(
     average_rating=Avg('reviews__rating')
 )
@@ -54,6 +55,7 @@ def home(request):
     
     cart = request.session.get('cart', {})
     cart_count = sum(cart.values())
+    print("PRODUCTS BEFORE RENDER:", products.count())
 
     return render(request, 'home.html', {
         'products': products,
