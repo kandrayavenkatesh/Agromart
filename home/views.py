@@ -56,9 +56,12 @@ def home(request):
     cart = request.session.get('cart', {})
     cart_count = sum(cart.values())
     print("PRODUCTS BEFORE RENDER:", products.count())
+    homepage_products = list(products)
+    print("HOMEPAGE PRODUCTS:", len(homepage_products))
 
     return render(request, 'home.html', {
         'products': products,
+        'homepage_products': homepage_products,
         'search_query': search_query,
         'selected_category': selected_category,
         'sort_by': sort_by,

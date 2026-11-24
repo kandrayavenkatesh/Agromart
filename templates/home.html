@@ -126,8 +126,10 @@
         <!-- PRODUCT CARDS -->
 
         <div class="product-container">
+            <p>Debug Product Count:
+         {{ homepage_products|length }}</p>
 
-            {% for product in products %}
+            {% for product in homepage_products %}
 
             <div class="product-card">
 
