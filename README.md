@@ -1,50 +1,65 @@
-# AgroMart - Fertilizer E-Commerce Website
+# AgroMart – Fertilizer E-Commerce Website
 
 ## About the Project
-AgroMart is a Django-based fertilizer e-commerce website developed as a learning and portfolio project.
 
-It allows users to browse fertilizers, register, log in, add products to their cart, and place orders.
+AgroMart is a Django-based fertilizer e-commerce web application developed as a learning and portfolio project.
 
-## Technologies Used
-- Python
-- Django
-- HTML
-- CSS
-- JavaScript
-- Bootstrap
-- SQLite / SQL
+It provides an online platform where customers can browse fertilizer products, view product details, create accounts, manage their shopping carts, add products to their wishlist, and place orders.
+
+The application also includes an admin dashboard to manage products, customers, inventory, and orders.
+
+## Live Website
+
+[Visit AgroMart](https://agromart-floc.onrender.com/)
+
+## GitHub Repository
+
+[View Source Code](https://github.com/kandrayavenkatesh/Agromart)
+
+## Technology Stack
+
+| Area | Technologies |
+|---|---|
+| Backend | Python, Django |
+| Frontend | HTML, CSS, JavaScript, Bootstrap |
+| Database | SQLite |
+| Version Control | Git |
+| Code Hosting | GitHub |
+| Deployment | Render |
+| Image Storage | Cloudinary |
 
 ## Features
+
 - User Registration and Login
 - Product Listing and Product Details
 - Product Search and Category Filtering
-- Shopping Cart
+- Shopping Cart and Wishlist
 - Checkout and Order Management
-- Wishlist
 - Product Reviews and Ratings
+- Customer Profile Management
 - Admin Dashboard
-- Stock Management
+- Product and Inventory Management
+- Customer and Order Management
+- Sales Reports and Coupon Management
 
-## How to Run Locally
+## Deployment
 
-1. Clone the repository.
-2. Create and activate a virtual environment.
-3. Install dependencies:
-
-   `pip install -r requirements.txt`
-
-4. Run migrations:
-
-   `python manage.py migrate`
-
-5. Start the server:
-
-   `python manage.py runserver`
-
-6. Open `http://127.0.0.1:8000/` in your browser.
+- Hosted on Render
+- Product images stored using Cloudinary
+- Source code maintained on GitHub
 
 ## Developer
-Kandraya Venkatesh
 
-## Project Type
-Educational / Portfolio Project
+**Kandraya Venkatesh**
+
+## Project Details
+
+- **Project:** AgroMart
+- **Domain:** E-Commerce
+- **Type:** Full-Stack Web Application
+- **Purpose:** Learning and Portfolio Development
+- **Status:** Successfully Deployed
+
+---
+
+**AgroMart – An Online Platform for Fertilizer Shopping.**
