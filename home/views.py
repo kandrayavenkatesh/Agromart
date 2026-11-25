@@ -30,7 +30,7 @@ def home(request):
     selected_category = request.GET.get('category', '')
     sort_by = request.GET.get('sort', '')
 
-    products = Product.objects.all()
+    products = Product.objects.all().order_by('id')
     print("TOTAL PRODUCTS:", products.count())
     products = products.annotate(
     average_rating=Avg('reviews__rating')
