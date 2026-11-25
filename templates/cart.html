@@ -1,9 +1,11 @@
+
 {% load static %}
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+    <meta charset="UTF-8">
     <title>My Shopping Cart - AgroMart</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'style.css' %}">
@@ -11,13 +13,19 @@
 
 <body class="cart-page">
 
+    <!-- NAVIGATION -->
+
     <nav class="navbar">
         <h2>AgroMart</h2>
+
         <ul>
             <li><a href="{% url 'home' %}">Home</a></li>
             <li><a href="{% url 'my_account' %}">My Account</a></li>
         </ul>
     </nav>
+
+
+    <!-- SHOPPING CART -->
 
     <div class="cart-container">
 
@@ -30,28 +38,49 @@
 
         <div class="cart-layout">
 
+            <!-- CART PRODUCTS -->
+
             <div class="cart-products">
 
                 {% for item in products %}
 
                 <div class="cart-product-card">
 
+                    <!-- PRODUCT IMAGE -->
+
                     <div class="cart-product-image">
 
                         {% if item.product.name == "Urea" %}
+
                         <img src="{% static 'images/urea.webp' %}" alt="Urea">
 
                         {% elif item.product.name == "DAP" %}
+
                         <img src="{% static 'images/dap.webp' %}" alt="DAP">
 
                         {% elif item.product.name == "NPK" %}
+
                         <img src="{% static 'images/npk.webp' %}" alt="NPK">
 
                         {% elif item.product.name == "Organic Fertilizer" %}
+
                         <img src="{% static 'images/organic.webp' %}" alt="Organic Fertilizer">
+
+                        {% elif item.product.image %}
+
+                        <img src="{{ item.product.image.url }}"
+                             alt="{{ item.product.name }}">
+
+                        {% else %}
+
+                        <p>No image available</p>
+
                         {% endif %}
 
                     </div>
+
+
+                    <!-- PRODUCT INFORMATION -->
 
                     <div class="cart-product-info">
 
@@ -65,21 +94,29 @@
                             Subtotal: ₹{{ item.subtotal }}
                         </p>
 
+
+                        <!-- QUANTITY -->
+
                         <div class="cart-quantity">
 
                             <span>Quantity:</span>
 
                             <a href="{% url 'decrease_quantity' item.product.id %}"
-                               class="quantity-btn">−</a>
+                               class="quantity-btn"
+                               aria-label="Decrease quantity">−</a>
 
                             <span class="quantity-number">
                                 {{ item.quantity }}
                             </span>
 
                             <a href="{% url 'increase_quantity' item.product.id %}"
-                               class="quantity-btn">+</a>
+                               class="quantity-btn"
+                               aria-label="Increase quantity">+</a>
 
                         </div>
+
+
+                        <!-- REMOVE PRODUCT -->
 
                         <a href="{% url 'remove_from_cart' item.product.id %}"
                            class="remove-cart-link">
@@ -95,24 +132,31 @@
             </div>
 
 
+            <!-- ORDER SUMMARY -->
+
             <div class="cart-summary">
 
                 <h2>Order Summary</h2>
 
                 <div class="summary-row">
+
                     <span>Total Amount</span>
+
                     <strong>₹{{ total }}</strong>
+
                 </div>
 
                 <div class="cart-summary-note">
                     Your selected products are ready for checkout.
                 </div>
 
-                <a href="{% url 'checkout' %}" class="checkout-cart-button">
+                <a href="{% url 'checkout' %}"
+                   class="checkout-cart-button">
                     Proceed to Checkout
                 </a>
 
-                <a href="{% url 'home' %}" class="continue-shopping-button">
+                <a href="{% url 'home' %}"
+                   class="continue-shopping-button">
                     Continue Shopping
                 </a>
 
@@ -122,13 +166,17 @@
 
         {% else %}
 
+
+        <!-- EMPTY CART -->
+
         <div class="empty-cart">
 
             <h2>Your Cart is Empty!</h2>
 
             <p>You haven't added any products to your cart yet.</p>
 
-            <a href="{% url 'home' %}" class="checkout-cart-button">
+            <a href="{% url 'home' %}"
+               class="checkout-cart-button">
                 Start Shopping
             </a>
 
@@ -138,9 +186,13 @@
 
     </div>
 
+
+    <!-- FOOTER -->
+
     <footer>
         <p>© 2026 AgroMart. All Rights Reserved.</p>
     </footer>
 
 </body>
+
 </html>
