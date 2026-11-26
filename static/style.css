@@ -1,6 +1,4 @@
-/* ==============================
-   GENERAL STYLING
-================================ */
+/* GENERAL STYLING */
 
 * {
     margin: 0;
@@ -14,9 +12,7 @@ body {
     color: #333;
 }
 
-/* ==============================
-   NAVBAR
-================================ */
+/* NAVBAR */
 
 .navbar {
     display: flex;
@@ -51,9 +47,7 @@ body {
     color: #d5ffd5;
 }
 
-/* ==============================
-   HERO SECTION
-================================ */
+/* HERO SECTION */
 
 .hero {
     text-align: center;
@@ -90,9 +84,7 @@ body {
     background-color: #105d2c;
 }
 
-/* ==============================
-   PRODUCTS SECTION
-================================ */
+/* PRODUCTS SECTION */
 
 .products {
     padding: 40px 20px;
@@ -105,9 +97,7 @@ body {
     margin-bottom: 30px;
 }
 
-/* ==============================
-   SEARCH BAR
-================================ */
+/* SEARCH BAR */
 
 .search-form {
     display: flex;
@@ -133,9 +123,7 @@ body {
     cursor: pointer;
 }
 
-/* ==============================
-   CATEGORY FILTER
-================================ */
+/* CATEGORY FILTER */
 
 .category-filter {
     margin: 25px auto;
@@ -162,9 +150,7 @@ body {
     color: white;
 }
 
-/* ==============================
-   PRODUCT SORTING
-================================ */
+/* PRODUCT SORTING */
 
 .sort-form {
     margin: 20px auto;
@@ -181,9 +167,7 @@ body {
     margin-left: 8px;
 }
 
-/* ==============================
-   PRODUCT CONTAINER
-================================ */
+/* PRODUCT CONTAINER */
 
 .product-container {
     display: flex;
@@ -195,9 +179,7 @@ body {
     width: 100%;
 }
 
-/* ==============================
-   PRODUCT CARD DESIGN
-================================ */
+/* PRODUCT CARD DESIGN */
 
 .product-card {
     width: 260px;
@@ -239,9 +221,7 @@ body {
     margin: 12px 0;
 }
 
-/* ==============================
-   PRODUCT BUTTONS
-================================ */
+/* PRODUCT BUTTONS */
 
 .product-card a {
     display: inline-block;
@@ -263,9 +243,7 @@ body {
     background-color: #105d2c;
 }
 
-/* ==============================
-   FOOTER
-================================ */
+/* FOOTER*/
 
 footer {
     background-color: #16803c;
@@ -275,9 +253,7 @@ footer {
     margin-top: 40px;
 }
 
-/* ==============================
-   TABLET RESPONSIVE DESIGN
-================================ */
+/* TABLET RESPONSIVE DESIGN */
 
 @media (max-width: 900px) {
     .product-container {
@@ -294,9 +270,7 @@ footer {
     }
 }
 
-/* ==============================
-   MOBILE RESPONSIVE DESIGN
-================================ */
+/* MOBILE RESPONSIVE DESIGN */
 
 @media (max-width: 600px) {
     .navbar {
@@ -340,9 +314,7 @@ footer {
     }
 }
 
-/* ==============================
-   ORDER STATUS COLORS
-================================ */
+/* ORDER STATUS COLORS*/
 
 .status-pending {
     color: orange;
@@ -374,9 +346,7 @@ footer {
     font-weight: bold;
 }
 
-/* ==============================
-   ORDER TRACKING SYSTEM
-================================ */
+/* ORDER TRACKING SYSTEM */
 
 .tracking-container {
     position: relative;
@@ -446,9 +416,7 @@ footer {
     margin: 20px 0;
 }
 
-/* ==============================
-   MOBILE ORDER TRACKING
-================================ */
+/* MOBILE ORDER TRACKING */
 
 @media (max-width: 600px) {
     .tracking-container {
@@ -473,9 +441,9 @@ footer {
     }
 }
 
-/* ==============================
+/* 
    PRINT INVOICE
-================================ */
+ */
 
 @media print {
     body {
@@ -508,9 +476,7 @@ footer {
     }
 }
 
-/* ==============================
-   ABOUT US PAGE
-================================ */
+/*ABOUT US PAGE */
 
 .about-hero {
     background: linear-gradient(135deg, #16803c, #42a85e);
@@ -588,9 +554,7 @@ footer {
     }
 }
 
-/* ==============================
-   CONTACT US PAGE
-================================ */
+/* CONTACT US PAGE */
 
 .contact-hero {
     background: linear-gradient(135deg, #16803c, #42a85e);
@@ -737,9 +701,7 @@ footer {
     }
 }
 
-/* ==============================
-   MY ORDERS PAGE
-================================ */
+/* MY ORDERS PAGE */
 
 .orders-container {
     max-width: 1000px;
@@ -897,9 +859,7 @@ footer {
     }
 }
 
-/* ==============================
-   MY ACCOUNT PAGE
-================================ */
+/* MY ACCOUNT PAGE */
 
 .account-hero {
     background: linear-gradient(135deg, #16803c, #42a85e);
@@ -1094,9 +1054,7 @@ footer {
     }
 }
 
-/* ==============================
-   FAQ PAGE
-================================ */
+/* FAQ PAGE */
 
 .faq-hero {
     background: linear-gradient(135deg, #16803c, #42a85e);
@@ -1244,9 +1202,7 @@ footer {
     }
 }
 
-/* ==============================
-   REGISTER PAGE
-================================ */
+/* REGISTER PAGE */
 
 .register-page {
     background: #f1f7f2;
@@ -1369,9 +1325,7 @@ footer {
     }
 }
 
-/* ==============================
-   LOGIN PAGE
-================================ */
+/* LOGIN PAGE*/
 
 .login-page {
     background: #f1f7f2;
@@ -1489,9 +1443,7 @@ footer {
     }
 }
 
-/* ==============================
-   CHANGE PASSWORD PAGE
-================================ */
+/* CHANGE PASSWORD PAGE */
 
 .change-password-page {
     background: #f1f7f2;
@@ -1604,9 +1556,7 @@ footer {
     }
 }
 
-/* ==============================
-   EDIT PROFILE PAGE
-================================ */
+/* EDIT PROFILE PAGE */
 
 .edit-profile-page {
     background: #f3f8f1;
@@ -1712,9 +1662,7 @@ footer {
     }
 }
 
-/* ==============================
-   PRODUCT DETAILS PAGE
-================================ */
+/* PRODUCT DETAILS PAGE */
 
 .product-details-page {
     background: #f3f8f1;
@@ -1930,9 +1878,7 @@ footer {
     }
 }
 
-/* ========================================
-   AGROMART - MODERN MOBILE DESIGN
-======================================== */
+/* AGROMART - MODERN MOBILE DESIGN */
 
 @media screen and (max-width: 768px) {
 
@@ -2241,9 +2187,7 @@ footer {
 }
 
 
-/* ========================================
-   SMALL MOBILE SCREENS
-======================================== */
+/* SMALL MOBILE SCREENS */
 
 @media screen and (max-width: 380px) {
 
@@ -2292,9 +2236,7 @@ footer {
     }
 }
 
-/* ========================================
-   AGROMART - SHOPPING CART DESIGN
-======================================== */
+/* AGROMART - SHOPPING CART DESIGN */
 
 .cart-page {
     background: #f4f6f4;
@@ -2567,9 +2509,7 @@ footer {
 }
 
 
-/* ========================================
-   SHOPPING CART - MOBILE VIEW
-======================================== */
+/* SHOPPING CART - MOBILE VIEW */
 
 @media screen and (max-width: 768px) {
 
@@ -2710,5 +2650,428 @@ footer {
 
     .cart-summary {
         padding: 15px;
+    }
+}
+
+/* AGROMART - ADMIN DASHBOARD */
+
+.admin-dashboard-page {
+    background: #f4f7f5;
+    min-height: 100vh;
+}
+
+/* DASHBOARD CONTAINER */
+
+.admin-dashboard-container {
+    max-width: 1400px;
+    width: 100%;
+    margin: 35px auto;
+    padding: 20px;
+}
+
+/* DASHBOARD HEADING */
+
+.admin-dashboard-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 35px;
+}
+
+.admin-dashboard-heading h1 {
+    color: #16803c;
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+.admin-dashboard-heading p {
+    color: #666;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.admin-label {
+    background: #e4f5e8;
+    color: #16803c;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* DASHBOARD SECTIONS */
+
+.admin-section {
+    margin-bottom: 35px;
+}
+
+.admin-section > h2 {
+    font-size: 23px;
+    color: #26352b;
+    margin-bottom: 20px;
+    padding-left: 12px;
+    border-left: 4px solid #16803c;
+}
+
+/* STATISTICS GRID */
+
+.admin-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+/* STATISTICS CARDS */
+
+.admin-stat-card {
+    display: block;
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    border: 1px solid #e4e9e5;
+    border-top: 4px solid #16803c;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    text-decoration: none;
+    color: inherit;
+    min-width: 0;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.admin-stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.10);
+}
+
+.admin-stat-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    background: #e4f5e8;
+    border-radius: 12px;
+    font-size: 26px;
+    margin-bottom: 18px;
+}
+
+.admin-stat-card p {
+    color: #555;
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.admin-stat-card h2 {
+    font-size: 30px;
+    color: #16803c;
+    margin-bottom: 10px;
+    overflow-wrap: anywhere;
+}
+
+.admin-stat-card span {
+    font-size: 13px;
+    color: #777;
+    line-height: 1.5;
+}
+
+/* INVENTORY ALERTS */
+
+.admin-alert-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.admin-alert-card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    min-width: 0;
+}
+
+.low-stock-card {
+    border-left: 5px solid #f59e0b;
+}
+
+.out-stock-card {
+    border-left: 5px solid #dc2626;
+}
+
+.admin-alert-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.admin-alert-heading h3 {
+    font-size: 18px;
+    color: #333;
+}
+
+.admin-alert-heading span {
+    padding: 7px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.low-stock-card .admin-alert-heading span {
+    background: #fff3d6;
+    color: #a16207;
+}
+
+.out-stock-card .admin-alert-heading span {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+.admin-product-alert {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 14px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.admin-product-alert strong {
+    color: #333;
+    overflow-wrap: anywhere;
+}
+
+.low-stock-card .admin-product-alert span {
+    color: #a16207;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.out-stock-card .admin-product-alert span {
+    color: #dc2626;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.admin-empty-message {
+    background: #f6f8f6;
+    padding: 15px;
+    border-radius: 8px;
+    color: #666;
+    font-size: 14px;
+}
+
+/* QUICK MANAGEMENT GRID */
+
+.admin-management-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 20px;
+}
+
+/* MANAGEMENT CARDS */
+
+.admin-management-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background: white;
+    padding: 25px;
+    border: 1px solid #e4e9e5;
+    border-radius: 12px;
+    text-decoration: none;
+    color: #333;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.admin-management-card:hover {
+    transform: translateY(-5px);
+    border-color: #16803c;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.10);
+}
+
+.management-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 55px;
+    height: 55px;
+    font-size: 28px;
+    background: #e4f5e8;
+    border-radius: 12px;
+    margin-bottom: 18px;
+}
+
+.admin-management-card strong {
+    display: block;
+    font-size: 18px;
+    color: #16803c;
+    margin-bottom: 12px;
+}
+
+.admin-management-card p {
+    color: #666;
+    font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 20px;
+}
+
+.admin-management-card span {
+    display: block;
+    margin-top: auto;
+    color: #16803c;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* BACK TO WEBSITE */
+
+.admin-back-link {
+    display: inline-block;
+    background: #16803c;
+    color: white;
+    padding: 13px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.admin-back-link:hover {
+    background: #105d2c;
+}
+
+/* TABLET RESPONSIVENESS */
+
+@media screen and (max-width: 1024px) {
+
+    .admin-management-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .admin-stats-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+/* MOBILE RESPONSIVENESS */
+
+@media screen and (max-width: 768px) {
+
+    .admin-dashboard-container {
+        margin: 15px auto;
+        padding: 15px;
+    }
+
+    .admin-dashboard-heading {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 25px;
+    }
+
+    .admin-dashboard-heading h1 {
+        font-size: 26px;
+    }
+
+    .admin-dashboard-heading p {
+        font-size: 13px;
+    }
+
+    .admin-section {
+        margin-bottom: 25px;
+    }
+
+    .admin-section > h2 {
+        font-size: 20px;
+    }
+
+    .admin-stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    .admin-stat-card {
+        padding: 15px;
+    }
+
+    .admin-stat-card h2 {
+        font-size: 23px;
+    }
+
+    .admin-stat-card p {
+        font-size: 13px;
+    }
+
+    .admin-stat-card span {
+        font-size: 11px;
+    }
+
+    .admin-stat-icon {
+        width: 42px;
+        height: 42px;
+        font-size: 22px;
+    }
+
+    .admin-alert-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 15px;
+    }
+
+    .admin-alert-card {
+        padding: 18px;
+    }
+
+    .admin-management-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    .admin-management-card {
+        padding: 15px;
+    }
+
+    .admin-management-card strong {
+        font-size: 15px;
+    }
+
+    .admin-management-card p {
+        font-size: 12px;
+    }
+
+    .admin-management-card span {
+        font-size: 12px;
+    }
+
+    .admin-back-link {
+        display: block;
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* SMALL MOBILE SCREENS */
+
+@media screen and (max-width: 380px) {
+
+    .admin-dashboard-container {
+        padding: 10px;
+    }
+
+    .admin-stat-card {
+        padding: 12px;
+    }
+
+    .admin-stat-card h2 {
+        font-size: 20px;
+    }
+
+    .admin-management-grid {
+        grid-template-columns: minmax(0, 1fr);
     }
 }
