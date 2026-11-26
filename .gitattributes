@@ -2,3 +2,5 @@ staticfiles/** linguist-generated=true
 static/admin/** linguist-vendored=true
 *.min.js linguist-vendored=true
 *.min.css linguist-vendored=true
+staticfiles/
+/staticfiles/
