@@ -1,0 +1,4 @@
+*.min.js linguist-vendored
+*.min.css linguist-vendored
+static/admin/** linguist-vendored
+staticfiles/** linguist-generated
